@@ -8,11 +8,11 @@ import 'package:flutter_gen/gen_l10n/gallery_localizations.dart';
 // BEGIN cupertinoTextFieldDemo
 
 class CupertinoTextFieldDemo extends StatelessWidget {
-  const CupertinoTextFieldDemo({Key key}) : super(key: key);
+  const CupertinoTextFieldDemo({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final localizations = GalleryLocalizations.of(context);
+    final localizations = GalleryLocalizations.of(context)!;
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         automaticallyImplyLeading: false,
@@ -39,6 +39,19 @@ class CupertinoTextFieldDemo extends StatelessWidget {
               child: CupertinoTextField(
                 textInputAction: TextInputAction.next,
                 restorationId: 'login_password_text_field',
+                placeholder: localizations.rallyLoginPassword,
+                clearButtonMode: OverlayVisibilityMode.editing,
+                obscureText: true,
+                autocorrect: false,
+              ),
+            ),
+            // Disabled text field
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: CupertinoTextField(
+                enabled: false,
+                textInputAction: TextInputAction.next,
+                restorationId: 'login_password_text_field_disabled',
                 placeholder: localizations.rallyLoginPassword,
                 clearButtonMode: OverlayVisibilityMode.editing,
                 obscureText: true,

@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:dual_screen/dual_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
@@ -13,24 +16,46 @@ import 'package:gallery/pages/backdrop.dart';
 import 'package:gallery/pages/splash.dart';
 import 'package:gallery/routes.dart';
 import 'package:gallery/themes/gallery_theme_data.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'firebase_options.dart';
+import 'layout/adaptive.dart';
 
 export 'package:gallery/data/demos.dart' show pumpDeferredLibraries;
 
-void main() {
+void main() async {
   GoogleFonts.config.allowRuntimeFetching = false;
+  await GetStorage.init();
+
+  if (defaultTargetPlatform != TargetPlatform.linux &&
+      defaultTargetPlatform != TargetPlatform.windows) {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    FlutterError.onError = (errorDetails) {
+      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+    };
+    // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+  }
+
   runApp(const GalleryApp());
 }
 
 class GalleryApp extends StatelessWidget {
   const GalleryApp({
-    Key key,
+    super.key,
     this.initialRoute,
     this.isTestMode = false,
-  }) : super(key: key);
+  });
 
+  final String? initialRoute;
   final bool isTestMode;
-  final String initialRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -46,22 +71,18 @@ class GalleryApp extends StatelessWidget {
       ),
       child: Builder(
         builder: (context) {
+          final options = GalleryOptions.of(context);
+          final hasHinge = MediaQuery.of(context).hinge?.bounds != null;
           return MaterialApp(
-            // By default on desktop, scrollbars are applied by the
-            // ScrollBehavior. This overrides that. All vertical scrollables in
-            // the gallery need to be audited before enabling this feature,
-            // see https://github.com/flutter/gallery/issues/523
-            scrollBehavior:
-                const MaterialScrollBehavior().copyWith(scrollbars: false),
             restorationScopeId: 'rootGallery',
             title: 'Flutter Gallery',
             debugShowCheckedModeBanner: false,
-            themeMode: GalleryOptions.of(context).themeMode,
+            themeMode: options.themeMode,
             theme: GalleryThemeData.lightThemeData.copyWith(
-              platform: GalleryOptions.of(context).platform,
+              platform: options.platform,
             ),
             darkTheme: GalleryThemeData.darkThemeData.copyWith(
-              platform: GalleryOptions.of(context).platform,
+              platform: options.platform,
             ),
             localizationsDelegates: const [
               ...GalleryLocalizations.localizationsDelegates,
@@ -69,12 +90,13 @@ class GalleryApp extends StatelessWidget {
             ],
             initialRoute: initialRoute,
             supportedLocales: GalleryLocalizations.supportedLocales,
-            locale: GalleryOptions.of(context).locale,
+            locale: options.locale,
             localeListResolutionCallback: (locales, supportedLocales) {
-              deviceLocale = locales.first;
+              deviceLocale = locales?.first;
               return basicLocaleListResolution(locales, supportedLocales);
             },
-            onGenerateRoute: RouteConfiguration.onGenerateRoute,
+            onGenerateRoute: (settings) =>
+                RouteConfiguration.onGenerateRoute(settings, hasHinge),
           );
         },
       ),
@@ -84,14 +106,16 @@ class GalleryApp extends StatelessWidget {
 
 class RootPage extends StatelessWidget {
   const RootPage({
-    Key key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const ApplyTextOptions(
+    return ApplyTextOptions(
       child: SplashPage(
-        child: Backdrop(),
+        child: Backdrop(
+          isDesktop: isDisplayDesktop(context),
+        ),
       ),
     );
   }

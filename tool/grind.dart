@@ -11,7 +11,7 @@ import 'package:path/path.dart' as path;
 void main(List<String> args) => grind(args);
 
 @Task('Get packages')
-Future<void> pubGet({String directory}) async {
+Future<void> pubGet({String? directory}) async {
   await _runProcess(
     'flutter',
     ['pub', 'get', if (directory != null) directory],

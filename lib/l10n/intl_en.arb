@@ -17,6 +17,26 @@
       }
     }
   },
+  "deselect": "Deselect",
+  "@deselect": {
+    "description": "Deselect a (selectable) item"
+  },
+  "notSelected": "Not selected",
+  "@notSelected": {
+    "description": "Indicates the status of a (selectable) item not being selected"
+  },
+  "select": "Select",
+  "@select": {
+    "description": "Select a (selectable) item"
+  },
+  "selectable": "Selectable (long press)",
+  "@selectable": {
+    "description": "Indicates the associated piece of UI is selectable by long pressing it"
+  },
+  "selected": "Selected",
+  "@selected": {
+    "description": "Indicates status of a (selectable) item being selected"
+  },
   "signIn": "SIGN IN",
   "@signIn": {
     "description": "Sign in label to sign into website."
@@ -45,14 +65,6 @@
   "@backToGallery": {
     "description": "Semantic label for back button to exit a study and return to the gallery home page."
   },
-  "cardsDemoTappable": "Tappable",
-  "@cardsDemoTappable": {
-    "description": "The user can tap this button"
-  },
-  "cardsDemoSelectable": "Selectable (long press)",
-  "@cardsDemoSelectable": {
-    "description": "If the user taps and hold this card. The card will toggled between on and off."
-  },
   "cardsDemoExplore": "Explore",
   "@cardsDemoExplore": {
     "description": "Click to see more about the content in the cards demo."
@@ -74,6 +86,10 @@
         "example": "Tamil"
       }
     }
+  },
+  "cardsDemoTappable": "Tappable",
+  "@cardsDemoTappable": {
+    "description": "The user can tap this button"
   },
   "cardsDemoTravelDestinationTitle1": "Top 10 Cities to Visit in Tamil Nadu",
   "@cardsDemoTravelDestinationTitle1": {
@@ -1279,19 +1295,23 @@
   },
   "demoCupertinoPickerTitle": "Pickers",
   "@demoCupertinoPickerTitle": {
-    "description": "Title for the cupertino date and time pickers component demo."
+    "description": "Title for the cupertino pickers component demo."
   },
-  "demoCupertinoPickerSubtitle": "iOS-style date and time pickers",
+  "demoCupertinoPickerSubtitle": "iOS-style pickers",
   "@demoCupertinoPickerSubtitle": {
     "description": "Subtitle for the cupertino pickers component demo."
   },
-  "demoCupertinoPickerDescription": "An iOS-style picker widget that can be used to select dates, times, or both date and time.",
+  "demoCupertinoPickerDescription": "An iOS-style picker widget that can be used to select strings, dates, times, or both date and time.",
   "@demoCupertinoPickerDescription": {
     "description": "Description for the cupertino pickers component demo."
   },
   "demoCupertinoPickerTimer": "Timer",
   "@demoCupertinoPickerTimer": {
     "description": "Label to open a countdown timer picker."
+  },
+  "demoCupertinoPicker": "Picker",
+  "@demoCupertinoPicker": {
+    "description": "Label to open an iOS picker."
   },
   "demoCupertinoPickerDate": "Date",
   "@demoCupertinoPickerDate": {
@@ -1406,6 +1426,34 @@
   "demoCupertinoTextFieldPIN": "PIN",
   "@demoCupertinoTextFieldPIN": {
     "description": "The placeholder for a text field where a user would enter their PIN number."
+  },
+  "demoCupertinoSearchTextFieldTitle": "Search text field",
+  "@demoCupertinoSearchTextFieldTitle": {
+    "description": "Title for the cupertino search text field demo."
+  },
+  "demoCupertinoSearchTextFieldSubtitle": "iOS-style search text field",
+  "@demoCupertinoSearchTextFieldSubtitle": {
+    "description": "Subtitle for the cupertino search text field demo."
+  },
+  "demoCupertinoSearchTextFieldDescription": "A search text field that lets the user search by entering text, and that can offer and filter suggestions.",
+  "@demoCupertinoSearchTextFieldDescription": {
+    "description": "Description for the cupertino search text field demo."
+  },
+  "demoCupertinoSearchTextFieldPlaceholder": "Enter some text",
+  "@demoCupertinoSearchTextFieldPlaceholder": {
+    "description": "The placeholder for a search text field demo."
+  },
+  "demoCupertinoScrollbarTitle": "Scrollbar",
+  "@demoCupertinoScrollbarTitle": {
+    "description": "Title for the cupertino scrollbar demo."
+  },
+  "demoCupertinoScrollbarSubtitle": "iOS-style scrollbar",
+  "@demoCupertinoScrollbarSubtitle": {
+    "description": "Subtitle for the cupertino scrollbar demo."
+  },
+  "demoCupertinoScrollbarDescription": "A scrollbar that wraps the given child",
+  "@demoCupertinoScrollbarDescription": {
+    "description": "Description for the cupertino scrollbar demo."
   },
   "demoMotionTitle": "Motion",
   "@demoMotionTitle": {
@@ -2050,7 +2098,7 @@
   },
   "demoTextFieldLifeStory": "Life story",
   "@demoTextFieldLifeStory": {
-    "description": "The label for for biography/life story input field."
+    "description": "The label for biography/life story input field."
   },
   "demoTextFieldSalary": "Salary",
   "@demoTextFieldSalary": {
@@ -2181,6 +2229,18 @@
   "chipBiking": "Biking",
   "@chipBiking": {
     "description": "A chip component to that indicates a biking selection."
+  },
+  "demo": "Demo",
+  "@demo": {
+    "description": "Used in the title of the demos."
+  },
+  "bottomAppBar": "Bottom app bar",
+  "@bottomAppBar": {
+    "description": "Used as semantic label for a BottomAppBar."
+  },
+  "loading": "Loading",
+  "@loading": {
+    "description": "Indicates the loading process."
   },
   "dialogDiscardTitle": "Discard draft?",
   "@dialogDiscardTitle": {
@@ -3296,5 +3356,71 @@
   "replyDraftsLabel": "Drafts",
   "@replyDraftsLabel": {
     "description": "Text label for Drafts destination."
+  },
+  "demoTwoPaneFoldableLabel": "Foldable",
+  "@demoTwoPaneFoldableLabel": {
+    "description": "Option title for TwoPane demo on foldable devices."
+  },
+  "demoTwoPaneFoldableDescription": "This is how TwoPane behaves on a foldable device.",
+  "@demoTwoPaneFoldableDescription": {
+    "description": "Description for the foldable option configuration on the TwoPane demo."
+  },
+  "demoTwoPaneSmallScreenLabel": "Small Screen",
+  "@demoTwoPaneSmallScreenLabel": {
+    "description": "Option title for TwoPane demo in small screen mode. Counterpart of the foldable option."
+  },
+  "demoTwoPaneSmallScreenDescription": "This is how TwoPane behaves on a small screen device.",
+  "@demoTwoPaneSmallScreenDescription": {
+    "description": "Description for the small screen option configuration on the TwoPane demo."
+  },
+  "demoTwoPaneTabletLabel": "Tablet / Desktop",
+  "@demoTwoPaneTabletLabel": {
+    "description": "Option title for TwoPane demo in tablet or desktop mode."
+  },
+  "demoTwoPaneTabletDescription": "This is how TwoPane behaves on a larger screen like a tablet or desktop.",
+  "@demoTwoPaneTabletDescription": {
+    "description": "Description for the tablet / desktop option configuration on the TwoPane demo."
+  },
+  "demoTwoPaneTitle": "TwoPane",
+  "@demoTwoPaneTitle": {
+    "description": "Title for the TwoPane widget demo."
+  },
+  "demoTwoPaneSubtitle": "Responsive layouts on foldable, large, and small screens",
+  "@demoTwoPaneSubtitle": {
+    "description": "Subtitle for the TwoPane widget demo."
+  },
+  "splashSelectDemo": "Select a demo",
+  "@splashSelectDemo": {
+    "description": "Tip for user, visible on the right side of the splash screen when Gallery runs on a foldable device."
+  },
+  "demoTwoPaneList": "List",
+  "@demoTwoPaneList": {
+    "description": "Title of one of the panes in the TwoPane demo. It sits on top of a list of items."
+  },
+  "demoTwoPaneDetails": "Details",
+  "@demoTwoPaneDetails": {
+    "description": "Title of one of the panes in the TwoPane demo, which shows details of the currently selected item."
+  },
+  "demoTwoPaneSelectItem": "Select an item",
+  "@demoTwoPaneSelectItem": {
+    "description": "Tip for user, visible on the right side of the TwoPane widget demo in the foldable configuration."
+  },
+  "demoTwoPaneItem": "Item {value}",
+  "@demoTwoPaneItem": {
+    "description": "Generic item placeholder visible in the TwoPane widget demo.",
+    "placeholders": {
+      "value": {
+        "example": "1"
+      }
+    }
+  },
+  "demoTwoPaneItemDetails": "Item {value} details",
+  "@demoTwoPaneItemDetails": {
+    "description": "Generic item description or details visible in the TwoPane widget demo.",
+    "placeholders": {
+      "value": {
+        "example": "1"
+      }
+    }
   }
 }

@@ -1,3 +1,7 @@
+// Copyright 2020 The Flutter team. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'dart:convert' show JsonEncoder;
 import 'dart:io';
 
@@ -25,9 +29,6 @@ Future<void> main() async {
   test('Can run a web benchmark', () async {
     stdout.writeln('Starting web benchmark tests ...');
 
-    // TODO(pennzht): Re-enable this test, https://github.com/flutter/gallery/issues/463.
-    return;
-    // ignore: dead_code
     final taskResult = await serveWebBenchmark(
       benchmarkAppDirectory: projectRootDirectory(),
       entryPoint: 'test_benchmarks/benchmarks/client.dart',
@@ -47,7 +48,7 @@ Future<void> main() async {
       for (final metricName in metricList) {
         for (final valueName in valueList) {
           expect(
-            taskResult.scores[benchmarkName].where(
+            taskResult.scores[benchmarkName]?.where(
               (score) => score.metric == '$metricName.$valueName',
             ),
             hasLength(1),
@@ -56,7 +57,7 @@ Future<void> main() async {
       }
 
       expect(
-        taskResult.scores[benchmarkName].where(
+        taskResult.scores[benchmarkName]?.where(
           (score) => score.metric == 'totalUiFrame.average',
         ),
         hasLength(1),
@@ -67,5 +68,8 @@ Future<void> main() async {
       const JsonEncoder.withIndent('  ').convert(taskResult.toJson()),
       isA<String>(),
     );
-  }, timeout: Timeout.none);
+  },
+      timeout: Timeout.none,
+      skip:
+          true); // TODO(guidezpl): re-enable these benchmarks https://github.com/flutter/gallery/issues/903
 }

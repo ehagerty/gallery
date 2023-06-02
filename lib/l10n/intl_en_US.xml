@@ -14,6 +14,26 @@
     description="A description about how to view the source code for this app."
     >To see the source code for this app, please visit the {repoLink}.</string>
   <string
+    name="deselect"
+    description="Deselect a (selectable) item"
+    >Deselect</string>
+  <string
+    name="notSelected"
+    description="Indicates the status of a (selectable) item not being selected"
+    >Not selected</string>
+  <string
+    name="select"
+    description="Select a (selectable) item"
+    >Select</string>
+  <string
+    name="selectable"
+    description="Indicates the associated piece of UI is selectable by long pressing it"
+    >Selectable (long press)</string>
+  <string
+    name="selected"
+    description="Indicates status of a (selectable) item being selected"
+    >Selected</string>
+  <string
     name="signIn"
     description="Sign in label to sign into website."
     >SIGN IN</string>
@@ -42,14 +62,6 @@
     description="Semantic label for back button to exit a study and return to the gallery home page."
     >Back to Gallery</string>
   <string
-    name="cardsDemoTappable"
-    description="The user can tap this button"
-    >Tappable</string>
-  <string
-    name="cardsDemoSelectable"
-    description="If the user taps and hold this card. The card will toggled between on and off."
-    >Selectable (long press)</string>
-  <string
     name="cardsDemoExplore"
     description="Click to see more about the content in the cards demo."
     >Explore</string>
@@ -61,6 +73,10 @@
     name="cardsDemoShareSemantics"
     description="Semantics label for Share. Label tells user to share the destinationName to the user. Example Share Tamil"
     >Share {destinationName}</string>
+  <string
+    name="cardsDemoTappable"
+    description="The user can tap this button"
+    >Tappable</string>
   <string
     name="cardsDemoTravelDestinationTitle1"
     description="The top 10 cities that you can visit in Tamil Nadu"
@@ -1179,20 +1195,24 @@
     >An iOS-styled navigation bar. The navigation bar is a toolbar that minimally consists of a page title, in the middle of the toolbar.</string>
   <string
     name="demoCupertinoPickerTitle"
-    description="Title for the cupertino date and time pickers component demo."
+    description="Title for the cupertino pickers component demo."
     >Pickers</string>
   <string
     name="demoCupertinoPickerSubtitle"
     description="Subtitle for the cupertino pickers component demo."
-    >iOS-style date and time pickers</string>
+    >iOS-style pickers</string>
   <string
     name="demoCupertinoPickerDescription"
     description="Description for the cupertino pickers component demo."
-    >An iOS-style picker widget that can be used to select dates, times, or both date and time.</string>
+    >An iOS-style picker widget that can be used to select strings, dates, times, or both date and time.</string>
   <string
     name="demoCupertinoPickerTimer"
     description="Label to open a countdown timer picker."
     >Timer</string>
+  <string
+    name="demoCupertinoPicker"
+    description="Label to open an iOS picker."
+    >Picker</string>
   <string
     name="demoCupertinoPickerDate"
     description="Label to open a date picker."
@@ -1297,6 +1317,34 @@
     name="demoCupertinoTextFieldPIN"
     description="The placeholder for a text field where a user would enter their PIN number."
     >PIN</string>
+  <string
+    name="demoCupertinoSearchTextFieldTitle"
+    description="Title for the cupertino search text field demo."
+    >Search text field</string>
+  <string
+    name="demoCupertinoSearchTextFieldSubtitle"
+    description="Subtitle for the cupertino search text field demo."
+    >iOS-style search text field</string>
+  <string
+    name="demoCupertinoSearchTextFieldDescription"
+    description="Description for the cupertino search text field demo."
+    >A search text field that lets the user search by entering text, and that can offer and filter suggestions.</string>
+  <string
+    name="demoCupertinoSearchTextFieldPlaceholder"
+    description="The placeholder for a search text field demo."
+    >Enter some text</string>
+  <string
+    name="demoCupertinoScrollbarTitle"
+    description="Title for the cupertino scrollbar demo."
+    >Scrollbar</string>
+  <string
+    name="demoCupertinoScrollbarSubtitle"
+    description="Subtitle for the cupertino scrollbar demo."
+    >iOS-style scrollbar</string>
+  <string
+    name="demoCupertinoScrollbarDescription"
+    description="Description for the cupertino scrollbar demo."
+    >A scrollbar that wraps the given child</string>
   <string
     name="demoMotionTitle"
     description="Title for the motion demo."
@@ -1935,7 +1983,7 @@
     >Keep it short, this is just a demo.</string>
   <string
     name="demoTextFieldLifeStory"
-    description="The label for for biography/life story input field."
+    description="The label for biography/life story input field."
     >Life story</string>
   <string
     name="demoTextFieldSalary"
@@ -2049,6 +2097,18 @@
     name="chipBiking"
     description="A chip component to that indicates a biking selection."
     >Biking</string>
+  <string
+    name="demo"
+    description="Used in the title of the demos."
+    >Demo</string>
+  <string
+    name="bottomAppBar"
+    description="Used as semantic label for a BottomAppBar."
+    >Bottom app bar</string>
+  <string
+    name="loading"
+    description="Indicates the loading process."
+    >Loading</string>
   <string
     name="dialogDiscardTitle"
     description="Alert dialog message to discard draft."
@@ -3097,4 +3157,60 @@
     name="replyDraftsLabel"
     description="Text label for Drafts destination."
     >Drafts</string>
+  <string
+    name="demoTwoPaneFoldableLabel"
+    description="Option title for TwoPane demo on foldable devices."
+    >Foldable</string>
+  <string
+    name="demoTwoPaneFoldableDescription"
+    description="Description for the foldable option configuration on the TwoPane demo."
+    >This is how TwoPane behaves on a foldable device.</string>
+  <string
+    name="demoTwoPaneSmallScreenLabel"
+    description="Option title for TwoPane demo in small screen mode. Counterpart of the foldable option."
+    >Small Screen</string>
+  <string
+    name="demoTwoPaneSmallScreenDescription"
+    description="Description for the small screen option configuration on the TwoPane demo."
+    >This is how TwoPane behaves on a small screen device.</string>
+  <string
+    name="demoTwoPaneTabletLabel"
+    description="Option title for TwoPane demo in tablet or desktop mode."
+    >Tablet / Desktop</string>
+  <string
+    name="demoTwoPaneTabletDescription"
+    description="Description for the tablet / desktop option configuration on the TwoPane demo."
+    >This is how TwoPane behaves on a larger screen like a tablet or desktop.</string>
+  <string
+    name="demoTwoPaneTitle"
+    description="Title for the TwoPane widget demo."
+    >TwoPane</string>
+  <string
+    name="demoTwoPaneSubtitle"
+    description="Subtitle for the TwoPane widget demo."
+    >Responsive layouts on foldable, large, and small screens</string>
+  <string
+    name="splashSelectDemo"
+    description="Tip for user, visible on the right side of the splash screen when Gallery runs on a foldable device."
+    >Select a demo</string>
+  <string
+    name="demoTwoPaneList"
+    description="Title of one of the panes in the TwoPane demo. It sits on top of a list of items."
+    >List</string>
+  <string
+    name="demoTwoPaneDetails"
+    description="Title of one of the panes in the TwoPane demo, which shows details of the currently selected item."
+    >Details</string>
+  <string
+    name="demoTwoPaneSelectItem"
+    description="Tip for user, visible on the right side of the TwoPane widget demo in the foldable configuration."
+    >Select an item</string>
+  <string
+    name="demoTwoPaneItem"
+    description="Generic item placeholder visible in the TwoPane widget demo."
+    >Item {value}</string>
+  <string
+    name="demoTwoPaneItemDetails"
+    description="Generic item description or details visible in the TwoPane widget demo."
+    >Item {value} details</string>
 </resources>

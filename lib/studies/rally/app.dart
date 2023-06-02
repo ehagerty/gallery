@@ -19,7 +19,7 @@ import 'package:google_fonts/google_fonts.dart';
 /// The home route is the main page with tabs for sub pages.
 /// The login route is the initial route.
 class RallyApp extends StatelessWidget {
-  const RallyApp({Key key}) : super(key: key);
+  const RallyApp({super.key});
 
   static const String loginRoute = routes.loginRoute;
   static const String homeRoute = routes.homeRoute;
@@ -64,7 +64,6 @@ class RallyApp extends StatelessWidget {
         elevation: 0,
       ),
       scaffoldBackgroundColor: RallyColors.primaryBackground,
-      primaryColor: RallyColors.primaryBackground,
       focusColor: RallyColors.focusColor,
       textTheme: _buildRallyTextTheme(base.textTheme),
       inputDecorationTheme: const InputDecorationTheme(
@@ -77,27 +76,30 @@ class RallyApp extends StatelessWidget {
         focusedBorder: InputBorder.none,
       ),
       visualDensity: VisualDensity.standard,
+      colorScheme: base.colorScheme.copyWith(
+        primary: RallyColors.primaryBackground,
+      ),
     );
   }
 
   TextTheme _buildRallyTextTheme(TextTheme base) {
     return base
         .copyWith(
-          bodyText2: GoogleFonts.robotoCondensed(
+          bodyMedium: GoogleFonts.robotoCondensed(
             fontSize: 14,
             fontWeight: FontWeight.w400,
             letterSpacing: letterSpacingOrNone(0.5),
           ),
-          bodyText1: GoogleFonts.eczar(
+          bodyLarge: GoogleFonts.eczar(
             fontSize: 40,
             fontWeight: FontWeight.w400,
             letterSpacing: letterSpacingOrNone(1.4),
           ),
-          button: GoogleFonts.robotoCondensed(
+          labelLarge: GoogleFonts.robotoCondensed(
             fontWeight: FontWeight.w700,
             letterSpacing: letterSpacingOrNone(2.8),
           ),
-          headline5: GoogleFonts.eczar(
+          headlineSmall: GoogleFonts.eczar(
             fontSize: 40,
             fontWeight: FontWeight.w600,
             letterSpacing: letterSpacingOrNone(1.4),

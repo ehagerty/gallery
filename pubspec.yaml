@@ -1,56 +1,66 @@
 name: gallery
 description: A resource to help developers evaluate and use Flutter.
 repository: https://github.com/flutter/gallery
-version: 2.9.3+020903
+version: 2.10.1+021001 # See README.md for details on versioning.
 
 environment:
-  flutter: ^2.6.0-0 # Kept relatively close to master channel version
-  sdk: ">=2.6.0 <3.0.0"
+  flutter: ^3.10.0-10.0.pre.17 # Keep relatively close to master channel version
+  sdk: ">=2.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  adaptive_breakpoints: ^0.1.0
-  animations: ^2.0.0
-  collection: ^1.15.0
-  cupertino_icons: ^1.0.2
+  adaptive_breakpoints: ^0.1.1
+  animations: ^2.0.2
+  collection: ^1.16.0
+  cupertino_icons: ^1.0.4
+  dual_screen: ^1.0.4
   flutter_gallery_assets: ^1.0.2
-  flutter_localized_locales: ^2.0.1
-  flutter_staggered_grid_view: ^0.4.0
-  google_fonts: ^2.0.0
-  intl: ^0.17.0
-  meta: ^1.3.0
-  package_info_plus: ^1.0.1
-  provider: ^6.0.0
+  flutter_localized_locales: ^2.0.4
+  flutter_staggered_grid_view: ^0.6.1
+  firebase_analytics: ^10.2.1
+  firebase_core: ^2.7.0
+  firebase_crashlytics: ^3.1.1
+  firebase_performance: ^0.9.0+14
+  get_storage: ^2.1.1
+  google_fonts: ^4.0.1
+  intl: any # An exact version pin will be provided by the Flutter SDK
+  meta: ^1.7.0
+  package_info_plus: ^3.0.3
+  path_provider: ^2.0.11
+  provider: ^6.0.2
   rally_assets: ^3.0.1
-  scoped_model: ^2.0.0-nullsafety.0
+  scoped_model: ^2.0.0
   shrine_images: ^2.0.1
-  url_launcher: ^6.0.3
-  vector_math: ^2.1.0
-  shared_preferences: ^2.0.9
+  transparent_image: ^2.0.1
+  url_launcher: ^6.1.2
+  vector_math: ^2.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_driver:
     sdk: flutter
-  args: ^2.1.0
-  flutter_lints: ^1.0.2
-  grinder: ^0.9.0
-  path: ^1.8.0
+  args: ^2.3.1
+  flutter_lints: ^2.0.1
+  grinder: ^0.9.1
+  path: ^1.8.1
   string_scanner: ^1.1.0
-  test: ^1.16.8
-  web_benchmarks: ^0.0.5
+  test: ^1.21.1
+  web_benchmarks: ^0.1.0
 
 flutter:
+  generate: true # Enables generation of localized strings from arb files
+  uses-material-design: true
   deferred-components:
     - name: crane
       libraries:
         # Only one library from the loading unit is necessary.
         - package:gallery/studies/crane/app.dart
       assets:
+        - packages/flutter_gallery_assets/crane/destinations/eat_0.jpg
         - packages/flutter_gallery_assets/crane/destinations/eat_1.jpg
         - packages/flutter_gallery_assets/crane/destinations/eat_2.jpg
         - packages/flutter_gallery_assets/crane/destinations/eat_3.jpg
@@ -92,7 +102,10 @@ flutter:
         - packages/flutter_gallery_assets/fonts/google_fonts/Raleway-SemiBold.ttf
         - packages/flutter_gallery_assets/fonts/google_fonts/Raleway-Regular.ttf
         - packages/flutter_gallery_assets/fonts/google_fonts/Raleway-Light.ttf
-
+  fonts:
+    - family: GalleryIcons
+      fonts:
+        - asset: packages/flutter_gallery_assets/fonts/GalleryIcons.ttf
   assets:
     - packages/flutter_gallery_assets/assets/studies/shrine_card_dark.png
     - packages/flutter_gallery_assets/assets/studies/starter_card.png
@@ -245,10 +258,3 @@ flutter:
     - packages/shrine_images/35-0.jpg
     - packages/shrine_images/36-0.jpg
     - packages/shrine_images/37-0.jpg
-
-  generate: true
-  uses-material-design: true
-  fonts:
-    - family: GalleryIcons
-      fonts:
-        - asset: packages/flutter_gallery_assets/fonts/GalleryIcons.ttf

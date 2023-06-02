@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-
 import 'package:gallery/layout/adaptive.dart';
 import 'package:gallery/layout/highlight_focus.dart';
 import 'package:gallery/layout/image_placeholder.dart';
@@ -13,9 +12,11 @@ import 'package:gallery/studies/crane/model/destination.dart';
 const mobileThumbnailSize = 60.0;
 
 class DestinationCard extends StatelessWidget {
-  const DestinationCard({Key key, @required this.destination})
-      : assert(destination != null),
-        super(key: key);
+  const DestinationCard({
+    super.key,
+    required this.destination,
+  });
+
   final Destination destination;
 
   @override
@@ -39,13 +40,13 @@ class DestinationCard extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 20, bottom: 10),
                     child: SelectableText(
                       destination.destination,
-                      style: textTheme.subtitle1,
+                      style: textTheme.titleMedium,
                     ),
                   ),
                   SelectableText(
                     destination.subtitle(context),
                     semanticsLabel: destination.subtitleSemantics(context),
-                    style: textTheme.subtitle2,
+                    style: textTheme.titleSmall,
                   ),
                 ],
               ),
@@ -65,11 +66,11 @@ class DestinationCard extends StatelessWidget {
                   ),
                 ),
                 title: SelectableText(destination.destination,
-                    style: textTheme.subtitle1),
+                    style: textTheme.titleMedium),
                 subtitle: SelectableText(
                   destination.subtitle(context),
                   semanticsLabel: destination.subtitleSemantics(context),
-                  style: textTheme.subtitle2,
+                  style: textTheme.titleSmall,
                 ),
               ),
               const Divider(thickness: 1),
@@ -78,7 +79,7 @@ class DestinationCard extends StatelessWidget {
 
     return HighlightFocus(
       debugLabel: 'DestinationCard: ${destination.destination}',
-      highlightColor: Colors.red.withOpacity(0.5),
+      highlightColor: Colors.red.withOpacity(0.1),
       onPressed: () {},
       child: card,
     );
@@ -86,8 +87,10 @@ class DestinationCard extends StatelessWidget {
 }
 
 class _DestinationImage extends StatelessWidget {
-  const _DestinationImage({@required this.destination})
-      : assert(destination != null);
+  const _DestinationImage({
+    required this.destination,
+  });
+
   final Destination destination;
 
   @override

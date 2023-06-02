@@ -8,36 +8,35 @@ import 'package:flutter_gen/gen_l10n/gallery_localizations.dart';
 // BEGIN snackbarsDemo
 
 class SnackbarsDemo extends StatelessWidget {
-  const SnackbarsDemo({Key key}) : super(key: key);
+  const SnackbarsDemo({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = GalleryLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(GalleryLocalizations.of(context).demoSnackbarsTitle),
+        title: Text(localizations.demoSnackbarsTitle),
       ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(GalleryLocalizations.of(context).demoSnackbarsText),
+              content: Text(localizations.demoSnackbarsText),
               action: SnackBarAction(
-                label: GalleryLocalizations.of(context)
-                    .demoSnackbarsActionButtonLabel,
+                label: localizations.demoSnackbarsActionButtonLabel,
                 onPressed: () {
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(
-                    GalleryLocalizations.of(context).demoSnackbarsAction,
+                    localizations.demoSnackbarsAction,
                   )));
                 },
               ),
             ));
           },
-          child:
-              Text(GalleryLocalizations.of(context).demoSnackbarsButtonLabel),
+          child: Text(localizations.demoSnackbarsButtonLabel),
         ),
       ),
     );

@@ -8,10 +8,10 @@ import 'package:flutter_gen/gen_l10n/gallery_localizations.dart';
 // BEGIN navRailDemo
 
 class NavRailDemo extends StatefulWidget {
-  const NavRailDemo({Key key}) : super(key: key);
+  const NavRailDemo({super.key});
 
   @override
-  _NavRailDemoState createState() => _NavRailDemoState();
+  State<NavRailDemo> createState() => _NavRailDemoState();
 }
 
 class _NavRailDemoState extends State<NavRailDemo> with RestorationMixin {
@@ -21,7 +21,7 @@ class _NavRailDemoState extends State<NavRailDemo> with RestorationMixin {
   String get restorationId => 'nav_rail_demo';
 
   @override
-  void restoreState(RestorationBucket oldBucket, bool initialRestore) {
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
     registerForRestoration(_selectedIndex, 'selected_index');
   }
 
@@ -33,7 +33,7 @@ class _NavRailDemoState extends State<NavRailDemo> with RestorationMixin {
 
   @override
   Widget build(BuildContext context) {
-    final localization = GalleryLocalizations.of(context);
+    final localization = GalleryLocalizations.of(context)!;
     final destinationFirst = localization.demoNavigationRailFirst;
     final destinationSecond = localization.demoNavigationRailSecond;
     final destinationThird = localization.demoNavigationRailThird;
@@ -53,6 +53,7 @@ class _NavRailDemoState extends State<NavRailDemo> with RestorationMixin {
           NavigationRail(
             leading: FloatingActionButton(
               onPressed: () {},
+              tooltip: localization.buttonTextCreate,
               child: const Icon(Icons.add),
             ),
             selectedIndex: _selectedIndex.value,

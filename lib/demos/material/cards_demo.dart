@@ -17,19 +17,14 @@ enum CardType {
 
 class TravelDestination {
   const TravelDestination({
-    @required this.assetName,
-    @required this.assetPackage,
-    @required this.title,
-    @required this.description,
-    @required this.city,
-    @required this.location,
+    required this.assetName,
+    required this.assetPackage,
+    required this.title,
+    required this.description,
+    required this.city,
+    required this.location,
     this.cardType = CardType.standard,
-  })  : assert(assetName != null),
-        assert(assetPackage != null),
-        assert(title != null),
-        assert(description != null),
-        assert(city != null),
-        assert(location != null);
+  });
 
   final String assetName;
   final String assetPackage;
@@ -40,53 +35,47 @@ class TravelDestination {
   final CardType cardType;
 }
 
-List<TravelDestination> destinations(BuildContext context) => [
-      TravelDestination(
-        assetName: 'places/india_thanjavur_market.png',
-        assetPackage: _kGalleryAssetsPackage,
-        title:
-            GalleryLocalizations.of(context).cardsDemoTravelDestinationTitle1,
-        description: GalleryLocalizations.of(context)
-            .cardsDemoTravelDestinationDescription1,
-        city: GalleryLocalizations.of(context).cardsDemoTravelDestinationCity1,
-        location: GalleryLocalizations.of(context)
-            .cardsDemoTravelDestinationLocation1,
-      ),
-      TravelDestination(
-        assetName: 'places/india_chettinad_silk_maker.png',
-        assetPackage: _kGalleryAssetsPackage,
-        title:
-            GalleryLocalizations.of(context).cardsDemoTravelDestinationTitle2,
-        description: GalleryLocalizations.of(context)
-            .cardsDemoTravelDestinationDescription2,
-        city: GalleryLocalizations.of(context).cardsDemoTravelDestinationCity2,
-        location: GalleryLocalizations.of(context)
-            .cardsDemoTravelDestinationLocation2,
-        cardType: CardType.tappable,
-      ),
-      TravelDestination(
-        assetName: 'places/india_tanjore_thanjavur_temple.png',
-        assetPackage: _kGalleryAssetsPackage,
-        title:
-            GalleryLocalizations.of(context).cardsDemoTravelDestinationTitle3,
-        description: GalleryLocalizations.of(context)
-            .cardsDemoTravelDestinationDescription3,
-        city: GalleryLocalizations.of(context).cardsDemoTravelDestinationCity1,
-        location: GalleryLocalizations.of(context)
-            .cardsDemoTravelDestinationLocation1,
-        cardType: CardType.selectable,
-      ),
-    ];
+List<TravelDestination> destinations(BuildContext context) {
+  final localizations = GalleryLocalizations.of(context)!;
+
+  return [
+    TravelDestination(
+      assetName: 'places/india_thanjavur_market.png',
+      assetPackage: _kGalleryAssetsPackage,
+      title: localizations.cardsDemoTravelDestinationTitle1,
+      description: localizations.cardsDemoTravelDestinationDescription1,
+      city: localizations.cardsDemoTravelDestinationCity1,
+      location: localizations.cardsDemoTravelDestinationLocation1,
+    ),
+    TravelDestination(
+      assetName: 'places/india_chettinad_silk_maker.png',
+      assetPackage: _kGalleryAssetsPackage,
+      title: localizations.cardsDemoTravelDestinationTitle2,
+      description: localizations.cardsDemoTravelDestinationDescription2,
+      city: localizations.cardsDemoTravelDestinationCity2,
+      location: localizations.cardsDemoTravelDestinationLocation2,
+      cardType: CardType.tappable,
+    ),
+    TravelDestination(
+      assetName: 'places/india_tanjore_thanjavur_temple.png',
+      assetPackage: _kGalleryAssetsPackage,
+      title: localizations.cardsDemoTravelDestinationTitle3,
+      description: localizations.cardsDemoTravelDestinationDescription3,
+      city: localizations.cardsDemoTravelDestinationCity1,
+      location: localizations.cardsDemoTravelDestinationLocation1,
+      cardType: CardType.selectable,
+    ),
+  ];
+}
 
 class TravelDestinationItem extends StatelessWidget {
-  const TravelDestinationItem({Key key, @required this.destination, this.shape})
-      : assert(destination != null),
-        super(key: key);
+  const TravelDestinationItem(
+      {super.key, required this.destination, this.shape});
 
   // This height will allow for all the Card's content to fit comfortably within the card.
   static const height = 360.0;
   final TravelDestination destination;
-  final ShapeBorder shape;
+  final ShapeBorder? shape;
 
   @override
   Widget build(BuildContext context) {
@@ -98,15 +87,18 @@ class TravelDestinationItem extends StatelessWidget {
         child: Column(
           children: [
             SectionTitle(
-                title:
-                    GalleryLocalizations.of(context).settingsTextScalingNormal),
+                title: GalleryLocalizations.of(context)!
+                    .settingsTextScalingNormal),
             SizedBox(
               height: height,
               child: Card(
                 // This ensures that the Card's children are clipped correctly.
                 clipBehavior: Clip.antiAlias,
                 shape: shape,
-                child: TravelDestinationContent(destination: destination),
+                child: Semantics(
+                  label: destination.title,
+                  child: TravelDestinationContent(destination: destination),
+                ),
               ),
             ),
           ],
@@ -117,15 +109,16 @@ class TravelDestinationItem extends StatelessWidget {
 }
 
 class TappableTravelDestinationItem extends StatelessWidget {
-  const TappableTravelDestinationItem(
-      {Key key, @required this.destination, this.shape})
-      : assert(destination != null),
-        super(key: key);
+  const TappableTravelDestinationItem({
+    super.key,
+    required this.destination,
+    this.shape,
+  });
 
   // This height will allow for all the Card's content to fit comfortably within the card.
   static const height = 298.0;
   final TravelDestination destination;
-  final ShapeBorder shape;
+  final ShapeBorder? shape;
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +130,7 @@ class TappableTravelDestinationItem extends StatelessWidget {
         child: Column(
           children: [
             SectionTitle(
-                title: GalleryLocalizations.of(context).cardsDemoTappable),
+                title: GalleryLocalizations.of(context)!.cardsDemoTappable),
             SizedBox(
               height: height,
               child: Card(
@@ -151,7 +144,10 @@ class TappableTravelDestinationItem extends StatelessWidget {
                       Theme.of(context).colorScheme.onSurface.withOpacity(0.12),
                   // Generally, material cards do not have a highlight overlay.
                   highlightColor: Colors.transparent,
-                  child: TravelDestinationContent(destination: destination),
+                  child: Semantics(
+                    label: destination.title,
+                    child: TravelDestinationContent(destination: destination),
+                  ),
                 ),
               ),
             ),
@@ -164,16 +160,15 @@ class TappableTravelDestinationItem extends StatelessWidget {
 
 class SelectableTravelDestinationItem extends StatelessWidget {
   const SelectableTravelDestinationItem({
-    Key key,
-    @required this.destination,
-    @required this.isSelected,
-    @required this.onSelected,
+    super.key,
+    required this.destination,
+    required this.isSelected,
+    required this.onSelected,
     this.shape,
-  })  : assert(destination != null),
-        super(key: key);
+  });
 
   final TravelDestination destination;
-  final ShapeBorder shape;
+  final ShapeBorder? shape;
   final bool isSelected;
   final VoidCallback onSelected;
 
@@ -183,6 +178,9 @@ class SelectableTravelDestinationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final String selectedStatus = isSelected
+        ? GalleryLocalizations.of(context)!.selected
+        : GalleryLocalizations.of(context)!.notSelected;
 
     return SafeArea(
       top: false,
@@ -191,8 +189,7 @@ class SelectableTravelDestinationItem extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: Column(
           children: [
-            SectionTitle(
-                title: GalleryLocalizations.of(context).cardsDemoSelectable),
+            SectionTitle(title: GalleryLocalizations.of(context)!.selectable),
             SizedBox(
               height: height,
               child: Card(
@@ -216,7 +213,14 @@ class SelectableTravelDestinationItem extends StatelessWidget {
                             ? colorScheme.primary.withOpacity(0.08)
                             : Colors.transparent,
                       ),
-                      TravelDestinationContent(destination: destination),
+                      Semantics(
+                        label: '${destination.title}, $selectedStatus',
+                        onLongPressHint: isSelected
+                            ? GalleryLocalizations.of(context)!.deselect
+                            : GalleryLocalizations.of(context)!.select,
+                        child:
+                            TravelDestinationContent(destination: destination),
+                      ),
                       Align(
                         alignment: Alignment.topRight,
                         child: Padding(
@@ -231,6 +235,7 @@ class SelectableTravelDestinationItem extends StatelessWidget {
                       ),
                     ],
                   ),
+                  //),
                 ),
               ),
             ),
@@ -243,9 +248,9 @@ class SelectableTravelDestinationItem extends StatelessWidget {
 
 class SectionTitle extends StatelessWidget {
   const SectionTitle({
-    Key key,
-    this.title,
-  }) : super(key: key);
+    super.key,
+    required this.title,
+  });
 
   final String title;
 
@@ -255,24 +260,25 @@ class SectionTitle extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(4, 4, 4, 12),
       child: Align(
         alignment: Alignment.centerLeft,
-        child: Text(title, style: Theme.of(context).textTheme.subtitle1),
+        child: Text(title, style: Theme.of(context).textTheme.titleMedium),
       ),
     );
   }
 }
 
 class TravelDestinationContent extends StatelessWidget {
-  const TravelDestinationContent({Key key, @required this.destination})
-      : assert(destination != null),
-        super(key: key);
+  const TravelDestinationContent({super.key, required this.destination});
 
   final TravelDestination destination;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final titleStyle = theme.textTheme.headline5.copyWith(color: Colors.white);
-    final descriptionStyle = theme.textTheme.subtitle1;
+    final titleStyle = theme.textTheme.headlineSmall!.copyWith(
+      color: Colors.white,
+    );
+    final descriptionStyle = theme.textTheme.titleMedium!;
+    final localizations = GalleryLocalizations.of(context)!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -302,9 +308,13 @@ class TravelDestinationContent extends StatelessWidget {
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    destination.title,
-                    style: titleStyle,
+                  child: Semantics(
+                    container: true,
+                    header: true,
+                    child: Text(
+                      destination.title,
+                      style: titleStyle,
+                    ),
                   ),
                 ),
               ),
@@ -312,27 +322,30 @@ class TravelDestinationContent extends StatelessWidget {
           ),
         ),
         // Description and share/explore buttons.
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-          child: DefaultTextStyle(
-            softWrap: false,
-            overflow: TextOverflow.ellipsis,
-            style: descriptionStyle,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // This array contains the three line description on each card
-                // demo.
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    destination.description,
-                    style: descriptionStyle.copyWith(color: Colors.black54),
+        Semantics(
+          container: true,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+            child: DefaultTextStyle(
+              softWrap: false,
+              overflow: TextOverflow.ellipsis,
+              style: descriptionStyle,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // This array contains the three line description on each card
+                  // demo.
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      destination.description,
+                      style: descriptionStyle.copyWith(color: Colors.black54),
+                    ),
                   ),
-                ),
-                Text(destination.city),
-                Text(destination.location),
-              ],
+                  Text(destination.city),
+                  Text(destination.location),
+                ],
+              ),
             ),
           ),
         ),
@@ -346,14 +359,14 @@ class TravelDestinationContent extends StatelessWidget {
               children: [
                 TextButton(
                   onPressed: () {},
-                  child: Text(GalleryLocalizations.of(context).demoMenuShare,
-                      semanticsLabel: GalleryLocalizations.of(context)
+                  child: Text(localizations.demoMenuShare,
+                      semanticsLabel: localizations
                           .cardsDemoShareSemantics(destination.title)),
                 ),
                 TextButton(
                   onPressed: () {},
-                  child: Text(GalleryLocalizations.of(context).cardsDemoExplore,
-                      semanticsLabel: GalleryLocalizations.of(context)
+                  child: Text(localizations.cardsDemoExplore,
+                      semanticsLabel: localizations
                           .cardsDemoExploreSemantics(destination.title)),
                 ),
               ],
@@ -365,10 +378,10 @@ class TravelDestinationContent extends StatelessWidget {
 }
 
 class CardsDemo extends StatefulWidget {
-  const CardsDemo({Key key}) : super(key: key);
+  const CardsDemo({super.key});
 
   @override
-  _CardsDemoState createState() => _CardsDemoState();
+  State<CardsDemo> createState() => _CardsDemoState();
 }
 
 class _CardsDemoState extends State<CardsDemo> with RestorationMixin {
@@ -378,7 +391,7 @@ class _CardsDemoState extends State<CardsDemo> with RestorationMixin {
   String get restorationId => 'cards_demo';
 
   @override
-  void restoreState(RestorationBucket oldBucket, bool initialRestore) {
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
     registerForRestoration(_isSelected, 'is_selected');
   }
 
@@ -393,7 +406,7 @@ class _CardsDemoState extends State<CardsDemo> with RestorationMixin {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(GalleryLocalizations.of(context).demoCardTitle),
+        title: Text(GalleryLocalizations.of(context)!.demoCardTitle),
       ),
       body: Scrollbar(
         child: ListView(

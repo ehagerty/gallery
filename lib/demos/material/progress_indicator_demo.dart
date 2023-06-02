@@ -9,18 +9,18 @@ import 'package:gallery/demos/material/material_demo_types.dart';
 // BEGIN progressIndicatorsDemo
 
 class ProgressIndicatorDemo extends StatefulWidget {
-  const ProgressIndicatorDemo({Key key, this.type}) : super(key: key);
+  const ProgressIndicatorDemo({super.key, required this.type});
 
   final ProgressIndicatorDemoType type;
 
   @override
-  _ProgressIndicatorDemoState createState() => _ProgressIndicatorDemoState();
+  State<ProgressIndicatorDemo> createState() => _ProgressIndicatorDemoState();
 }
 
 class _ProgressIndicatorDemoState extends State<ProgressIndicatorDemo>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _animation;
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -53,21 +53,22 @@ class _ProgressIndicatorDemoState extends State<ProgressIndicatorDemo>
   String get _title {
     switch (widget.type) {
       case ProgressIndicatorDemoType.circular:
-        return GalleryLocalizations.of(context)
+        return GalleryLocalizations.of(context)!
             .demoCircularProgressIndicatorTitle;
       case ProgressIndicatorDemoType.linear:
-        return GalleryLocalizations.of(context)
+        return GalleryLocalizations.of(context)!
             .demoLinearProgressIndicatorTitle;
     }
-    return '';
   }
 
-  Widget _buildIndicators(BuildContext context, Widget child) {
+  Widget _buildIndicators(BuildContext context, Widget? child) {
     switch (widget.type) {
       case ProgressIndicatorDemoType.circular:
         return Column(
           children: [
-            const CircularProgressIndicator(),
+            CircularProgressIndicator(
+              semanticsLabel: GalleryLocalizations.of(context)!.loading,
+            ),
             const SizedBox(height: 32),
             CircularProgressIndicator(value: _animation.value),
           ],

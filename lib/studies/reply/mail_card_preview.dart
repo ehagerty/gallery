@@ -13,16 +13,14 @@ const _iconAssetLocation = 'reply/icons';
 
 class MailPreviewCard extends StatelessWidget {
   const MailPreviewCard({
-    Key key,
-    @required this.id,
-    @required this.email,
-    @required this.onDelete,
-    @required this.onStar,
-    @required this.isStarred,
-    @required this.onStarredMailbox,
-  })  : assert(id != null),
-        assert(email != null),
-        super(key: key);
+    super.key,
+    required this.id,
+    required this.email,
+    required this.onDelete,
+    required this.onStar,
+    required this.isStarred,
+    required this.onStarredMailbox,
+  });
 
   final int id;
   final Email email;
@@ -118,16 +116,12 @@ class MailPreviewCard extends StatelessWidget {
 
 class _DismissibleContainer extends StatelessWidget {
   const _DismissibleContainer({
-    @required this.icon,
-    @required this.backgroundColor,
-    @required this.iconColor,
-    @required this.alignment,
-    @required this.padding,
-  })  : assert(icon != null),
-        assert(backgroundColor != null),
-        assert(iconColor != null),
-        assert(alignment != null),
-        assert(padding != null);
+    required this.icon,
+    required this.backgroundColor,
+    required this.iconColor,
+    required this.alignment,
+    required this.padding,
+  });
 
   final String icon;
   final Color backgroundColor;
@@ -160,20 +154,18 @@ class _DismissibleContainer extends StatelessWidget {
 
 class _MailPreview extends StatelessWidget {
   const _MailPreview({
-    @required this.id,
-    @required this.email,
-    @required this.onTap,
+    required this.id,
+    required this.email,
+    required this.onTap,
     this.onStar,
     this.onDelete,
-  })  : assert(id != null),
-        assert(email != null),
-        assert(onTap != null);
+  });
 
   final int id;
   final Email email;
   final VoidCallback onTap;
-  final VoidCallback onStar;
-  final VoidCallback onDelete;
+  final VoidCallback? onStar;
+  final VoidCallback? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -212,10 +204,10 @@ class _MailPreview extends StatelessWidget {
                           children: [
                             Text(
                               '${email.sender} - ${email.time}',
-                              style: textTheme.caption,
+                              style: textTheme.bodySmall,
                             ),
                             const SizedBox(height: 4),
-                            Text(email.subject, style: textTheme.headline5),
+                            Text(email.subject, style: textTheme.headlineSmall),
                             const SizedBox(height: 16),
                           ],
                         ),
@@ -236,14 +228,14 @@ class _MailPreview extends StatelessWidget {
                       email.message,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
-                      style: textTheme.bodyText2,
+                      style: textTheme.bodyMedium,
                     ),
                   ),
                   if (email.containsPictures) ...[
-                    Flexible(
+                    const Flexible(
                       fit: FlexFit.loose,
                       child: Column(
-                        children: const [
+                        children: [
                           SizedBox(height: 20),
                           _PicturePreview(),
                         ],
@@ -287,16 +279,16 @@ class _PicturePreview extends StatelessWidget {
 
 class _MailPreviewActionBar extends StatelessWidget {
   const _MailPreviewActionBar({
-    @required this.avatar,
-    this.isStarred,
+    required this.avatar,
+    required this.isStarred,
     this.onStar,
     this.onDelete,
-  }) : assert(avatar != null);
+  });
 
   final String avatar;
   final bool isStarred;
-  final VoidCallback onStar;
-  final VoidCallback onDelete;
+  final VoidCallback? onStar;
+  final VoidCallback? onDelete;
 
   @override
   Widget build(BuildContext context) {

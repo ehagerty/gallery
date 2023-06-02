@@ -14,10 +14,12 @@ typedef DeferredWidgetBuilder = Widget Function();
 /// state as long as closure to create widget stays the same.
 ///
 class DeferredWidget extends StatefulWidget {
-  DeferredWidget(this.libraryLoader, this.createWidget,
-      {Key key, Widget placeholder})
-      : placeholder = placeholder ?? Container(),
-        super(key: key);
+  DeferredWidget(
+    this.libraryLoader,
+    this.createWidget, {
+    super.key,
+    Widget? placeholder,
+  }) : placeholder = placeholder ?? Container();
 
   final LibraryLoader libraryLoader;
   final DeferredWidgetBuilder createWidget;
@@ -31,17 +33,18 @@ class DeferredWidget extends StatefulWidget {
         _loadedModules.add(loader);
       });
     }
-    return _moduleLoaders[loader];
+    return _moduleLoaders[loader]!;
   }
 
   @override
-  _DeferredWidgetState createState() => _DeferredWidgetState();
+  State<DeferredWidget> createState() => _DeferredWidgetState();
 }
 
 class _DeferredWidgetState extends State<DeferredWidget> {
   _DeferredWidgetState();
-  Widget _loadedChild;
-  DeferredWidgetBuilder _loadedCreator;
+
+  Widget? _loadedChild;
+  DeferredWidgetBuilder? _loadedCreator;
 
   @override
   void initState() {
@@ -59,7 +62,7 @@ class _DeferredWidgetState extends State<DeferredWidget> {
   void _onLibraryLoaded() {
     setState(() {
       _loadedCreator = widget.createWidget;
-      _loadedChild = _loadedCreator();
+      _loadedChild = _loadedCreator!();
     });
   }
 
@@ -69,7 +72,7 @@ class _DeferredWidgetState extends State<DeferredWidget> {
     /// treat as const Widget.
     if (_loadedCreator != widget.createWidget && _loadedCreator != null) {
       _loadedCreator = widget.createWidget;
-      _loadedChild = _loadedCreator();
+      _loadedChild = _loadedCreator!();
     }
     return _loadedChild ?? widget.placeholder;
   }
@@ -79,9 +82,9 @@ class _DeferredWidgetState extends State<DeferredWidget> {
 /// the widget is a deferred component and is currently being installed.
 class DeferredLoadingPlaceholder extends StatelessWidget {
   const DeferredLoadingPlaceholder({
-    Key key,
+    super.key,
     this.name = 'This widget',
-  }) : super(key: key);
+  });
 
   final String name;
 
@@ -93,7 +96,7 @@ class DeferredLoadingPlaceholder extends StatelessWidget {
             color: Colors.grey[700],
             border: Border.all(
               width: 20,
-              color: Colors.grey[700],
+              color: Colors.grey[700]!,
             ),
             borderRadius: const BorderRadius.all(Radius.circular(10))),
         width: 250,
@@ -102,11 +105,11 @@ class DeferredLoadingPlaceholder extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text('$name is installing.',
-                style: Theme.of(context).textTheme.headline4),
+                style: Theme.of(context).textTheme.headlineMedium),
             Container(height: 10),
             Text(
                 '$name is a deferred component which are downloaded and installed at runtime.',
-                style: Theme.of(context).textTheme.bodyText1),
+                style: Theme.of(context).textTheme.bodyLarge),
             Container(height: 20),
             const Center(child: CircularProgressIndicator()),
           ],

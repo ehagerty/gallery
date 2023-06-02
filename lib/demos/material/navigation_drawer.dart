@@ -10,11 +10,11 @@ import 'package:flutter_gen/gen_l10n/gallery_localizations.dart';
 // Press the Navigation Drawer button to the left of AppBar to show
 // a simple Drawer with two items.
 class NavDrawerDemo extends StatelessWidget {
-  const NavDrawerDemo({Key key}) : super(key: key);
+  const NavDrawerDemo({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var localization = GalleryLocalizations.of(context);
+    var localization = GalleryLocalizations.of(context)!;
     final drawerHeader = UserAccountsDrawerHeader(
       accountName: Text(
         localization.demoNavigationDrawerUserName,
@@ -55,11 +55,14 @@ class NavDrawerDemo extends StatelessWidget {
           localization.demoNavigationDrawerTitle,
         ),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(50.0),
-          child: Text(
-            localization.demoNavigationDrawerText,
+      body: Semantics(
+        container: true,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(50.0),
+            child: Text(
+              localization.demoNavigationDrawerText,
+            ),
           ),
         ),
       ),

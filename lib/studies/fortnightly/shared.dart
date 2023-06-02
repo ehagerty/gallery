@@ -4,35 +4,37 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/gallery_localizations.dart';
-
 import 'package:gallery/data/gallery_options.dart';
 import 'package:gallery/layout/image_placeholder.dart';
 import 'package:gallery/layout/text_scale.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class ArticleData {
-  ArticleData(
-      {this.imageUrl,
-      this.imageAspectRatio,
-      this.category,
-      this.title,
-      this.snippet});
+  ArticleData({
+    required this.imageUrl,
+    required this.imageAspectRatio,
+    required this.category,
+    required this.title,
+    this.snippet,
+  });
 
   final String imageUrl;
   final double imageAspectRatio;
   final String category;
   final String title;
-  final String snippet;
+  final String? snippet;
 }
 
 class HorizontalArticlePreview extends StatelessWidget {
-  const HorizontalArticlePreview({Key key, this.data, this.minutes})
-      : super(key: key);
+  const HorizontalArticlePreview({
+    super.key,
+    required this.data,
+    this.minutes,
+  });
 
   final ArticleData data;
-  final int minutes;
+  final int? minutes;
 
   @override
   Widget build(BuildContext context) {
@@ -47,20 +49,20 @@ class HorizontalArticlePreview extends StatelessWidget {
             children: [
               SelectableText(
                 data.category,
-                style: textTheme.subtitle1,
+                style: textTheme.titleMedium,
               ),
               const SizedBox(height: 12),
               SelectableText(
                 data.title,
-                style: textTheme.headline5.copyWith(fontSize: 16),
+                style: textTheme.headlineSmall!.copyWith(fontSize: 16),
               ),
             ],
           ),
         ),
         if (minutes != null) ...[
           SelectableText(
-            GalleryLocalizations.of(context).craneMinutes(minutes),
-            style: textTheme.bodyText1,
+            GalleryLocalizations.of(context)!.craneMinutes(minutes!),
+            style: textTheme.bodyLarge,
           ),
           const SizedBox(width: 8),
         ],
@@ -81,16 +83,16 @@ class HorizontalArticlePreview extends StatelessWidget {
 
 class VerticalArticlePreview extends StatelessWidget {
   const VerticalArticlePreview({
-    Key key,
-    this.data,
+    super.key,
+    required this.data,
     this.width,
     this.headlineTextStyle,
     this.showSnippet = false,
-  }) : super(key: key);
+  });
 
   final ArticleData data;
-  final double width;
-  final TextStyle headlineTextStyle;
+  final double? width;
+  final TextStyle? headlineTextStyle;
   final bool showSnippet;
 
   @override
@@ -124,18 +126,18 @@ class VerticalArticlePreview extends StatelessWidget {
           const SizedBox(height: 12),
           SelectableText(
             data.category,
-            style: textTheme.subtitle1,
+            style: textTheme.titleMedium,
           ),
           const SizedBox(height: 12),
           SelectableText(
             data.title,
-            style: headlineTextStyle ?? textTheme.headline5,
+            style: headlineTextStyle ?? textTheme.headlineSmall,
           ),
           if (showSnippet) ...[
             const SizedBox(height: 4),
             SelectableText(
-              data.snippet,
-              style: textTheme.bodyText2,
+              data.snippet!,
+              style: textTheme.bodyMedium,
             ),
           ],
         ],
@@ -145,6 +147,7 @@ class VerticalArticlePreview extends StatelessWidget {
 }
 
 List<Widget> buildArticlePreviewItems(BuildContext context) {
+  final localizations = GalleryLocalizations.of(context)!;
   Widget articleDivider = Container(
     margin: const EdgeInsets.symmetric(vertical: 16),
     color: Colors.black.withOpacity(0.07),
@@ -162,21 +165,18 @@ List<Widget> buildArticlePreviewItems(BuildContext context) {
       data: ArticleData(
         imageUrl: 'fortnightly/fortnightly_healthcare.jpg',
         imageAspectRatio: 391 / 248,
-        category:
-            GalleryLocalizations.of(context).fortnightlyMenuWorld.toUpperCase(),
-        title: GalleryLocalizations.of(context).fortnightlyHeadlineHealthcare,
+        category: localizations.fortnightlyMenuWorld.toUpperCase(),
+        title: localizations.fortnightlyHeadlineHealthcare,
       ),
-      headlineTextStyle: textTheme.headline5.copyWith(fontSize: 20),
+      headlineTextStyle: textTheme.headlineSmall!.copyWith(fontSize: 20),
     ),
     articleDivider,
     HorizontalArticlePreview(
       data: ArticleData(
         imageUrl: 'fortnightly/fortnightly_war.png',
         imageAspectRatio: 1,
-        category: GalleryLocalizations.of(context)
-            .fortnightlyMenuPolitics
-            .toUpperCase(),
-        title: GalleryLocalizations.of(context).fortnightlyHeadlineWar,
+        category: localizations.fortnightlyMenuPolitics.toUpperCase(),
+        title: localizations.fortnightlyHeadlineWar,
       ),
     ),
     articleDivider,
@@ -184,25 +184,22 @@ List<Widget> buildArticlePreviewItems(BuildContext context) {
       data: ArticleData(
         imageUrl: 'fortnightly/fortnightly_gas.png',
         imageAspectRatio: 1,
-        category:
-            GalleryLocalizations.of(context).fortnightlyMenuTech.toUpperCase(),
-        title: GalleryLocalizations.of(context).fortnightlyHeadlineGasoline,
+        category: localizations.fortnightlyMenuTech.toUpperCase(),
+        title: localizations.fortnightlyHeadlineGasoline,
       ),
     ),
     sectionDivider,
     SelectableText(
-      GalleryLocalizations.of(context).fortnightlyLatestUpdates,
-      style: textTheme.headline6,
+      localizations.fortnightlyLatestUpdates,
+      style: textTheme.titleLarge,
     ),
     articleDivider,
     HorizontalArticlePreview(
       data: ArticleData(
         imageUrl: 'fortnightly/fortnightly_army.png',
         imageAspectRatio: 1,
-        category: GalleryLocalizations.of(context)
-            .fortnightlyMenuPolitics
-            .toUpperCase(),
-        title: GalleryLocalizations.of(context).fortnightlyHeadlineArmy,
+        category: localizations.fortnightlyMenuPolitics.toUpperCase(),
+        title: localizations.fortnightlyHeadlineArmy,
       ),
       minutes: 2,
     ),
@@ -211,9 +208,8 @@ List<Widget> buildArticlePreviewItems(BuildContext context) {
       data: ArticleData(
         imageUrl: 'fortnightly/fortnightly_stocks.png',
         imageAspectRatio: 77 / 64,
-        category:
-            GalleryLocalizations.of(context).fortnightlyMenuWorld.toUpperCase(),
-        title: GalleryLocalizations.of(context).fortnightlyHeadlineStocks,
+        category: localizations.fortnightlyMenuWorld.toUpperCase(),
+        title: localizations.fortnightlyHeadlineStocks,
       ),
       minutes: 5,
     ),
@@ -222,9 +218,8 @@ List<Widget> buildArticlePreviewItems(BuildContext context) {
       data: ArticleData(
         imageUrl: 'fortnightly/fortnightly_fabrics.png',
         imageAspectRatio: 76 / 64,
-        category:
-            GalleryLocalizations.of(context).fortnightlyMenuTech.toUpperCase(),
-        title: GalleryLocalizations.of(context).fortnightlyHeadlineFabrics,
+        category: localizations.fortnightlyMenuTech.toUpperCase(),
+        title: localizations.fortnightlyHeadlineFabrics,
       ),
       minutes: 4,
     ),
@@ -233,7 +228,7 @@ List<Widget> buildArticlePreviewItems(BuildContext context) {
 }
 
 class HashtagBar extends StatelessWidget {
-  const HashtagBar({Key key}) : super(key: key);
+  const HashtagBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -245,6 +240,8 @@ class HashtagBar extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final height = 32 * reducedTextScale(context);
 
+    final localizations = GalleryLocalizations.of(context)!;
+
     return SizedBox(
       height: height,
       child: ListView(
@@ -254,36 +251,36 @@ class HashtagBar extends StatelessWidget {
           const SizedBox(width: 16),
           Center(
             child: SelectableText(
-              '#${GalleryLocalizations.of(context).fortnightlyTrendingTechDesign}',
-              style: textTheme.subtitle2,
+              '#${localizations.fortnightlyTrendingTechDesign}',
+              style: textTheme.titleSmall,
             ),
           ),
           verticalDivider,
           Center(
             child: SelectableText(
-              '#${GalleryLocalizations.of(context).fortnightlyTrendingReform}',
-              style: textTheme.subtitle2,
+              '#${localizations.fortnightlyTrendingReform}',
+              style: textTheme.titleSmall,
             ),
           ),
           verticalDivider,
           Center(
             child: SelectableText(
-              '#${GalleryLocalizations.of(context).fortnightlyTrendingHealthcareRevolution}',
-              style: textTheme.subtitle2,
+              '#${localizations.fortnightlyTrendingHealthcareRevolution}',
+              style: textTheme.titleSmall,
             ),
           ),
           verticalDivider,
           Center(
             child: SelectableText(
-              '#${GalleryLocalizations.of(context).fortnightlyTrendingGreenArmy}',
-              style: textTheme.subtitle2,
+              '#${localizations.fortnightlyTrendingGreenArmy}',
+              style: textTheme.titleSmall,
             ),
           ),
           verticalDivider,
           Center(
             child: SelectableText(
-              '#${GalleryLocalizations.of(context).fortnightlyTrendingStocks}',
-              style: textTheme.subtitle2,
+              '#${localizations.fortnightlyTrendingStocks}',
+              style: textTheme.titleSmall,
             ),
           ),
           verticalDivider,
@@ -294,12 +291,13 @@ class HashtagBar extends StatelessWidget {
 }
 
 class NavigationMenu extends StatelessWidget {
-  const NavigationMenu({Key key, this.isCloseable = false}) : super(key: key);
+  const NavigationMenu({super.key, this.isCloseable = false});
 
   final bool isCloseable;
 
   @override
   Widget build(BuildContext context) {
+    final localizations = GalleryLocalizations.of(context)!;
     return ListView(
       children: [
         if (isCloseable)
@@ -319,25 +317,25 @@ class NavigationMenu extends StatelessWidget {
           ),
         const SizedBox(height: 32),
         MenuItem(
-          GalleryLocalizations.of(context).fortnightlyMenuFrontPage,
+          localizations.fortnightlyMenuFrontPage,
           header: true,
         ),
-        MenuItem(GalleryLocalizations.of(context).fortnightlyMenuWorld),
-        MenuItem(GalleryLocalizations.of(context).fortnightlyMenuUS),
-        MenuItem(GalleryLocalizations.of(context).fortnightlyMenuPolitics),
-        MenuItem(GalleryLocalizations.of(context).fortnightlyMenuBusiness),
-        MenuItem(GalleryLocalizations.of(context).fortnightlyMenuTech),
-        MenuItem(GalleryLocalizations.of(context).fortnightlyMenuScience),
-        MenuItem(GalleryLocalizations.of(context).fortnightlyMenuSports),
-        MenuItem(GalleryLocalizations.of(context).fortnightlyMenuTravel),
-        MenuItem(GalleryLocalizations.of(context).fortnightlyMenuCulture),
+        MenuItem(localizations.fortnightlyMenuWorld),
+        MenuItem(localizations.fortnightlyMenuUS),
+        MenuItem(localizations.fortnightlyMenuPolitics),
+        MenuItem(localizations.fortnightlyMenuBusiness),
+        MenuItem(localizations.fortnightlyMenuTech),
+        MenuItem(localizations.fortnightlyMenuScience),
+        MenuItem(localizations.fortnightlyMenuSports),
+        MenuItem(localizations.fortnightlyMenuTravel),
+        MenuItem(localizations.fortnightlyMenuCulture),
       ],
     );
   }
 }
 
 class MenuItem extends StatelessWidget {
-  const MenuItem(this.title, {Key key, this.header = false}) : super(key: key);
+  const MenuItem(this.title, {super.key, this.header = false});
 
   final String title;
   final bool header;
@@ -356,7 +354,7 @@ class MenuItem extends StatelessWidget {
           Expanded(
             child: SelectableText(
               title,
-              style: Theme.of(context).textTheme.subtitle1.copyWith(
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     fontWeight: header ? FontWeight.w700 : FontWeight.w600,
                     fontSize: 16,
                   ),
@@ -369,8 +367,12 @@ class MenuItem extends StatelessWidget {
 }
 
 class StockItem extends StatelessWidget {
-  const StockItem({Key key, this.ticker, this.price, this.percent})
-      : super(key: key);
+  const StockItem({
+    super.key,
+    required this.ticker,
+    required this.price,
+    required this.percent,
+  });
 
   final String ticker;
   final String price;
@@ -387,21 +389,21 @@ class StockItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SelectableText(ticker, style: textTheme.subtitle1),
+        SelectableText(ticker, style: textTheme.titleMedium),
         const SizedBox(height: 2),
         Row(
           children: [
             Expanded(
               child: SelectableText(
                 price,
-                style: textTheme.subtitle2.copyWith(
-                  color: textTheme.subtitle2.color.withOpacity(0.75),
+                style: textTheme.titleSmall!.copyWith(
+                  color: textTheme.titleSmall!.color!.withOpacity(0.75),
                 ),
               ),
             ),
             SelectableText(
               percent > 0 ? '+' : '-',
-              style: textTheme.subtitle2.copyWith(
+              style: textTheme.titleSmall!.copyWith(
                 fontSize: 12,
                 color: percent > 0
                     ? const Color(0xff20CF63)
@@ -411,9 +413,9 @@ class StockItem extends StatelessWidget {
             const SizedBox(width: 4),
             SelectableText(
               percentFormat.format(percent.abs() / 100),
-              style: textTheme.caption.copyWith(
+              style: textTheme.bodySmall!.copyWith(
                 fontSize: 12,
-                color: textTheme.subtitle2.color.withOpacity(0.75),
+                color: textTheme.titleSmall!.color!.withOpacity(0.75),
               ),
             ),
           ],
@@ -486,7 +488,11 @@ List<Widget> buildStockItems(BuildContext context) {
 }
 
 class VideoPreview extends StatelessWidget {
-  const VideoPreview({Key key, this.data, this.time}) : super(key: key);
+  const VideoPreview({
+    super.key,
+    required this.data,
+    required this.time,
+  });
 
   final ArticleData data;
   final String time;
@@ -521,29 +527,31 @@ class VideoPreview extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: SelectableText(data.category, style: textTheme.subtitle1),
+              child: SelectableText(
+                data.category,
+                style: textTheme.titleMedium,
+              ),
             ),
-            SelectableText(time, style: textTheme.bodyText1)
+            SelectableText(time, style: textTheme.bodyLarge)
           ],
         ),
         const SizedBox(height: 4),
         SelectableText(data.title,
-            style: textTheme.headline5.copyWith(fontSize: 16)),
+            style: textTheme.headlineSmall!.copyWith(fontSize: 16)),
       ],
     );
   }
 }
 
 List<Widget> buildVideoPreviewItems(BuildContext context) {
+  final localizations = GalleryLocalizations.of(context)!;
   return <Widget>[
     VideoPreview(
       data: ArticleData(
         imageUrl: 'fortnightly/fortnightly_feminists.jpg',
         imageAspectRatio: 148 / 88,
-        category: GalleryLocalizations.of(context)
-            .fortnightlyMenuPolitics
-            .toUpperCase(),
-        title: GalleryLocalizations.of(context).fortnightlyHeadlineFeminists,
+        category: localizations.fortnightlyMenuPolitics.toUpperCase(),
+        title: localizations.fortnightlyHeadlineFeminists,
       ),
       time: '2:31',
     ),
@@ -552,9 +560,8 @@ List<Widget> buildVideoPreviewItems(BuildContext context) {
       data: ArticleData(
         imageUrl: 'fortnightly/fortnightly_bees.jpg',
         imageAspectRatio: 148 / 88,
-        category:
-            GalleryLocalizations.of(context).fortnightlyMenuUS.toUpperCase(),
-        title: GalleryLocalizations.of(context).fortnightlyHeadlineBees,
+        category: localizations.fortnightlyMenuUS.toUpperCase(),
+        title: localizations.fortnightlyHeadlineBees,
       ),
       time: '1:37',
     ),
@@ -573,40 +580,40 @@ ThemeData buildTheme(BuildContext context) {
     highlightColor: Colors.transparent,
     textTheme: TextTheme(
       // preview snippet
-      bodyText2: GoogleFonts.merriweather(
+      bodyMedium: GoogleFonts.merriweather(
         fontWeight: FontWeight.w300,
         fontSize: 16,
-        textStyle: lightTextTheme.bodyText2,
+        textStyle: lightTextTheme.bodyMedium,
       ),
       // time in latest updates
-      bodyText1: GoogleFonts.libreFranklin(
+      bodyLarge: GoogleFonts.libreFranklin(
         fontWeight: FontWeight.w500,
         fontSize: 11,
         color: Colors.black.withOpacity(0.5),
-        textStyle: lightTextTheme.bodyText1,
+        textStyle: lightTextTheme.bodyLarge,
       ),
       // preview headlines
-      headline5: GoogleFonts.libreFranklin(
+      headlineSmall: GoogleFonts.libreFranklin(
         fontWeight: FontWeight.w500,
         fontSize: 16,
-        textStyle: lightTextTheme.headline5,
+        textStyle: lightTextTheme.headlineSmall,
       ),
       // (caption 2), preview category, stock ticker
-      subtitle1: GoogleFonts.robotoCondensed(
+      titleMedium: GoogleFonts.robotoCondensed(
         fontWeight: FontWeight.w700,
         fontSize: 16,
       ),
-      subtitle2: GoogleFonts.libreFranklin(
+      titleSmall: GoogleFonts.libreFranklin(
         fontWeight: FontWeight.w400,
         fontSize: 14,
-        textStyle: lightTextTheme.subtitle2,
+        textStyle: lightTextTheme.titleSmall,
       ),
       // section titles: Top Highlights, Last Updated...
-      headline6: GoogleFonts.merriweather(
+      titleLarge: GoogleFonts.merriweather(
         fontWeight: FontWeight.w700,
         fontStyle: FontStyle.italic,
         fontSize: 14,
-        textStyle: lightTextTheme.headline6,
+        textStyle: lightTextTheme.titleLarge,
       ),
     ),
   );

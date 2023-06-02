@@ -11,7 +11,7 @@ import 'package:gallery/studies/starter/routes.dart' as routes;
 const _primaryColor = Color(0xFF6200EE);
 
 class StarterApp extends StatelessWidget {
-  const StarterApp({Key key}) : super(key: key);
+  const StarterApp({super.key});
 
   static const String defaultRoute = routes.defaultRoute;
 
@@ -19,7 +19,7 @@ class StarterApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       restorationScopeId: 'starter_app',
-      title: GalleryLocalizations.of(context).starterAppTitle,
+      title: GalleryLocalizations.of(context)!.starterAppTitle,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: GalleryLocalizations.localizationsDelegates,
       supportedLocales: GalleryLocalizations.supportedLocales,
@@ -29,7 +29,6 @@ class StarterApp extends StatelessWidget {
         StarterApp.defaultRoute: (context) => const _Home(),
       },
       theme: ThemeData(
-        primaryColor: _primaryColor,
         highlightColor: Colors.transparent,
         colorScheme: const ColorScheme(
           primary: _primaryColor,

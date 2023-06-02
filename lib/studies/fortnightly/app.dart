@@ -15,7 +15,7 @@ import 'package:gallery/studies/fortnightly/shared.dart';
 const _fortnightlyTitle = 'Fortnightly';
 
 class FortnightlyApp extends StatelessWidget {
-  const FortnightlyApp({Key key}) : super(key: key);
+  const FortnightlyApp({super.key});
 
   static const String defaultRoute = routes.defaultRoute;
 
@@ -71,7 +71,7 @@ class _FortnightlyHomeMobile extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            tooltip: GalleryLocalizations.of(context).shrineTooltipSearch,
+            tooltip: GalleryLocalizations.of(context)!.shrineTooltipSearch,
             onPressed: () {},
           ),
         ],
@@ -136,7 +136,7 @@ class _FortnightlyHomeDesktop extends StatelessWidget {
                       alignment: AlignmentDirectional.centerEnd,
                       child: IconButton(
                         icon: const Icon(Icons.search),
-                        tooltip: GalleryLocalizations.of(context)
+                        tooltip: GalleryLocalizations.of(context)!
                             .shrineTooltipSearch,
                         onPressed: () {},
                       ),

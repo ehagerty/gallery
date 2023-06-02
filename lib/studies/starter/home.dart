@@ -10,13 +10,14 @@ import 'package:gallery/layout/adaptive.dart';
 const appBarDesktopHeight = 128.0;
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     final isDesktop = isDisplayDesktop(context);
+    final localizations = GalleryLocalizations.of(context)!;
     final body = SafeArea(
       child: Padding(
         padding: isDesktop
@@ -26,20 +27,20 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SelectableText(
-              GalleryLocalizations.of(context).starterAppGenericHeadline,
-              style: textTheme.headline3.copyWith(
+              localizations.starterAppGenericHeadline,
+              style: textTheme.displaySmall!.copyWith(
                 color: colorScheme.onSecondary,
               ),
             ),
             const SizedBox(height: 10),
             SelectableText(
-              GalleryLocalizations.of(context).starterAppGenericSubtitle,
-              style: textTheme.subtitle1,
+              localizations.starterAppGenericSubtitle,
+              style: textTheme.titleMedium,
             ),
             const SizedBox(height: 48),
             SelectableText(
-              GalleryLocalizations.of(context).starterAppGenericBody,
-              style: textTheme.bodyText1,
+              localizations.starterAppGenericBody,
+              style: textTheme.bodyLarge,
             ),
           ],
         ),
@@ -61,11 +62,11 @@ class HomePage extends StatelessWidget {
                 heroTag: 'Extended Add',
                 onPressed: () {},
                 label: Text(
-                  GalleryLocalizations.of(context).starterAppGenericButton,
+                  localizations.starterAppGenericButton,
                   style: TextStyle(color: colorScheme.onSecondary),
                 ),
                 icon: Icon(Icons.add, color: colorScheme.onSecondary),
-                tooltip: GalleryLocalizations.of(context).starterAppTooltipAdd,
+                tooltip: localizations.starterAppTooltipAdd,
               ),
             ),
           ),
@@ -79,7 +80,7 @@ class HomePage extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           heroTag: 'Add',
           onPressed: () {},
-          tooltip: GalleryLocalizations.of(context).starterAppTooltipAdd,
+          tooltip: localizations.starterAppTooltipAdd,
           child: Icon(
             Icons.add,
             color: Theme.of(context).colorScheme.onSecondary,
@@ -92,9 +93,9 @@ class HomePage extends StatelessWidget {
 
 class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AdaptiveAppBar({
-    Key key,
+    super.key,
     this.isDesktop = false,
-  }) : super(key: key);
+  });
 
   final bool isDesktop;
 
@@ -106,12 +107,12 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localizations = GalleryLocalizations.of(context)!;
     return AppBar(
       automaticallyImplyLeading: !isDesktop,
       title: isDesktop
           ? null
-          : SelectableText(
-              GalleryLocalizations.of(context).starterAppGenericTitle),
+          : SelectableText(localizations.starterAppGenericTitle),
       bottom: isDesktop
           ? PreferredSize(
               preferredSize: const Size.fromHeight(26),
@@ -119,8 +120,8 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
                 alignment: AlignmentDirectional.centerStart,
                 margin: const EdgeInsetsDirectional.fromSTEB(72, 0, 0, 22),
                 child: SelectableText(
-                  GalleryLocalizations.of(context).starterAppGenericTitle,
-                  style: themeData.textTheme.headline6.copyWith(
+                  localizations.starterAppGenericTitle,
+                  style: themeData.textTheme.titleLarge!.copyWith(
                     color: themeData.colorScheme.onPrimary,
                   ),
                 ),
@@ -130,17 +131,17 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           icon: const Icon(Icons.share),
-          tooltip: GalleryLocalizations.of(context).starterAppTooltipShare,
+          tooltip: localizations.starterAppTooltipShare,
           onPressed: () {},
         ),
         IconButton(
           icon: const Icon(Icons.favorite),
-          tooltip: GalleryLocalizations.of(context).starterAppTooltipFavorite,
+          tooltip: localizations.starterAppTooltipFavorite,
           onPressed: () {},
         ),
         IconButton(
           icon: const Icon(Icons.search),
-          tooltip: GalleryLocalizations.of(context).starterAppTooltipSearch,
+          tooltip: localizations.starterAppTooltipSearch,
           onPressed: () {},
         ),
       ],
@@ -149,10 +150,10 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class ListDrawer extends StatefulWidget {
-  const ListDrawer({Key key}) : super(key: key);
+  const ListDrawer({super.key});
 
   @override
-  _ListDrawerState createState() => _ListDrawerState();
+  State<ListDrawer> createState() => _ListDrawerState();
 }
 
 class _ListDrawerState extends State<ListDrawer> {
@@ -163,18 +164,19 @@ class _ListDrawerState extends State<ListDrawer> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final localizations = GalleryLocalizations.of(context)!;
     return Drawer(
       child: SafeArea(
         child: ListView(
           children: [
             ListTile(
               title: SelectableText(
-                GalleryLocalizations.of(context).starterAppTitle,
-                style: textTheme.headline6,
+                localizations.starterAppTitle,
+                style: textTheme.titleLarge,
               ),
               subtitle: SelectableText(
-                GalleryLocalizations.of(context).starterAppGenericSubtitle,
-                style: textTheme.bodyText2,
+                localizations.starterAppGenericSubtitle,
+                style: textTheme.bodyMedium,
               ),
             ),
             const Divider(),
@@ -184,7 +186,7 @@ class _ListDrawerState extends State<ListDrawer> {
                 selected: i == selectedItem,
                 leading: const Icon(Icons.favorite),
                 title: Text(
-                  GalleryLocalizations.of(context).starterAppDrawerItem(i + 1),
+                  localizations.starterAppDrawerItem(i + 1),
                 ),
                 onTap: () {
                   setState(() {

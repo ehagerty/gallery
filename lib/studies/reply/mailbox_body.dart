@@ -6,7 +6,7 @@ import 'package:gallery/studies/reply/model/email_store.dart';
 import 'package:provider/provider.dart';
 
 class MailboxBody extends StatelessWidget {
-  const MailboxBody({Key key}) : super(key: key);
+  const MailboxBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class MailboxBody extends StatelessWidget {
         final destinationString = destination
             .toString()
             .substring(destination.toString().indexOf('.') + 1);
-        List<Email> emails;
+        late List<Email> emails;
 
         switch (destination) {
           case MailboxPageType.inbox:
@@ -90,7 +90,14 @@ class MailboxBody extends StatelessWidget {
                             email: email,
                             isStarred: model.isEmailStarred(email.id),
                             onDelete: () => model.deleteEmail(email.id),
-                            onStar: () => model.starEmail(email.id),
+                            onStar: () {
+                              int emailId = email.id;
+                              if (model.isEmailStarred(emailId)) {
+                                model.unstarEmail(emailId);
+                              } else {
+                                model.starEmail(emailId);
+                              }
+                            },
                             onStarredMailbox: model.selectedMailboxPage ==
                                 MailboxPageType.starred,
                           );

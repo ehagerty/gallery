@@ -8,17 +8,15 @@ import 'package:flutter/material.dart';
 @immutable
 class ColorPicker extends StatelessWidget {
   const ColorPicker({
-    Key key,
-    @required this.colors,
-    @required this.selectedColor,
+    super.key,
+    required this.colors,
+    required this.selectedColor,
     this.onColorSelection,
-  })  : assert(colors != null),
-        assert(selectedColor != null),
-        super(key: key);
+  });
 
   final Set<Color> colors;
   final Color selectedColor;
-  final ValueChanged<Color> onColorSelection;
+  final ValueChanged<Color>? onColorSelection;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +28,7 @@ class ColorPicker extends StatelessWidget {
           selected: color == selectedColor,
           onTap: () {
             if (onColorSelection != null) {
-              onColorSelection(color);
+              onColorSelection!(color);
             }
           },
         );
@@ -43,15 +41,14 @@ class ColorPicker extends StatelessWidget {
 @immutable
 class _ColorPickerSwatch extends StatelessWidget {
   const _ColorPickerSwatch({
-    @required this.color,
-    @required this.selected,
+    required this.color,
+    required this.selected,
     this.onTap,
-  })  : assert(color != null),
-        assert(selected != null);
+  });
 
   final Color color;
   final bool selected;
-  final Function onTap;
+  final Function? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +60,7 @@ class _ColorPickerSwatch extends StatelessWidget {
         fillColor: color,
         onPressed: () {
           if (onTap != null) {
-            onTap();
+            onTap!();
           }
         },
         child: !selected

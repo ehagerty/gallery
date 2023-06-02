@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 final rootNavKey = GlobalKey<NavigatorState>();
 
 class ReplyApp extends StatefulWidget {
-  const ReplyApp({Key key}) : super(key: key);
+  const ReplyApp({super.key});
 
   static const String homeRoute = routes.homeRoute;
   static const String composeRoute = routes.composeRoute;
@@ -37,7 +37,7 @@ class ReplyApp extends StatefulWidget {
   }
 
   @override
-  _ReplyAppState createState() => _ReplyAppState();
+  State<ReplyApp> createState() => _ReplyAppState();
 }
 
 class _ReplyAppState extends State<ReplyApp> with RestorationMixin {
@@ -47,7 +47,7 @@ class _ReplyAppState extends State<ReplyApp> with RestorationMixin {
   String get restorationId => 'replyState';
 
   @override
-  void restoreState(RestorationBucket oldBucket, bool initialRestore) {
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
     registerForRestoration(_appState, 'state');
   }
 
@@ -90,10 +90,8 @@ class _ReplyAppState extends State<ReplyApp> with RestorationMixin {
                 builder: (context) => const AdaptiveNav(),
                 settings: settings,
               );
-              break;
             case ReplyApp.composeRoute:
               return ReplyApp.createComposeRoute(settings);
-              break;
           }
           return null;
         },
@@ -109,7 +107,7 @@ class _RestorableEmailState extends RestorableListenable<EmailStore> {
   }
 
   @override
-  EmailStore fromPrimitives(Object data) {
+  EmailStore fromPrimitives(Object? data) {
     final appState = EmailStore();
     final appData = Map<String, dynamic>.from(data as Map);
     appState.selectedEmailId = appData['selectedEmailId'] as int;
@@ -147,7 +145,7 @@ class _RestorableEmailState extends RestorableListenable<EmailStore> {
 ThemeData _buildReplyLightTheme(BuildContext context) {
   final base = ThemeData.light();
   return base.copyWith(
-    bottomAppBarColor: ReplyColors.blue700,
+    bottomAppBarTheme: const BottomAppBarTheme(color: ReplyColors.blue700),
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: ReplyColors.blue700,
       modalBackgroundColor: Colors.white.withOpacity(0.7),
@@ -156,12 +154,12 @@ ThemeData _buildReplyLightTheme(BuildContext context) {
       backgroundColor: ReplyColors.blue700,
       selectedIconTheme: const IconThemeData(color: ReplyColors.orange500),
       selectedLabelTextStyle:
-          GoogleFonts.workSansTextTheme().headline5.copyWith(
+          GoogleFonts.workSansTextTheme().headlineSmall!.copyWith(
                 color: ReplyColors.orange500,
               ),
       unselectedIconTheme: const IconThemeData(color: ReplyColors.blue200),
       unselectedLabelTextStyle:
-          GoogleFonts.workSansTextTheme().headline5.copyWith(
+          GoogleFonts.workSansTextTheme().headlineSmall!.copyWith(
                 color: ReplyColors.blue200,
               ),
     ),
@@ -194,7 +192,9 @@ ThemeData _buildReplyLightTheme(BuildContext context) {
 ThemeData _buildReplyDarkTheme(BuildContext context) {
   final base = ThemeData.dark();
   return base.copyWith(
-    bottomAppBarColor: ReplyColors.darkBottomAppBarBackground,
+    bottomAppBarTheme: const BottomAppBarTheme(
+      color: ReplyColors.darkBottomAppBarBackground,
+    ),
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: ReplyColors.darkDrawerBackground,
       modalBackgroundColor: Colors.black.withOpacity(0.7),
@@ -203,12 +203,12 @@ ThemeData _buildReplyDarkTheme(BuildContext context) {
       backgroundColor: ReplyColors.darkBottomAppBarBackground,
       selectedIconTheme: const IconThemeData(color: ReplyColors.orange300),
       selectedLabelTextStyle:
-          GoogleFonts.workSansTextTheme().headline5.copyWith(
+          GoogleFonts.workSansTextTheme().headlineSmall!.copyWith(
                 color: ReplyColors.orange300,
               ),
       unselectedIconTheme: const IconThemeData(color: ReplyColors.greyLabel),
       unselectedLabelTextStyle:
-          GoogleFonts.workSansTextTheme().headline5.copyWith(
+          GoogleFonts.workSansTextTheme().headlineSmall!.copyWith(
                 color: ReplyColors.greyLabel,
               ),
     ),
@@ -250,56 +250,56 @@ ChipThemeData _buildChipTheme(
     secondarySelectedColor: chipBackground,
     padding: const EdgeInsets.all(4),
     shape: const StadiumBorder(),
-    labelStyle: GoogleFonts.workSansTextTheme().bodyText2.copyWith(
+    labelStyle: GoogleFonts.workSansTextTheme().bodyMedium!.copyWith(
           color: brightness == Brightness.dark
               ? ReplyColors.white50
               : ReplyColors.black900,
         ),
-    secondaryLabelStyle: GoogleFonts.workSansTextTheme().bodyText2,
+    secondaryLabelStyle: GoogleFonts.workSansTextTheme().bodyMedium,
     brightness: brightness,
   );
 }
 
 TextTheme _buildReplyLightTextTheme(TextTheme base) {
   return base.copyWith(
-    headline4: GoogleFonts.workSans(
+    headlineMedium: GoogleFonts.workSans(
       fontWeight: FontWeight.w600,
       fontSize: 34,
       letterSpacing: letterSpacingOrNone(0.4),
       height: 0.9,
       color: ReplyColors.black900,
     ),
-    headline5: GoogleFonts.workSans(
+    headlineSmall: GoogleFonts.workSans(
       fontWeight: FontWeight.bold,
       fontSize: 24,
       letterSpacing: letterSpacingOrNone(0.27),
       color: ReplyColors.black900,
     ),
-    headline6: GoogleFonts.workSans(
+    titleLarge: GoogleFonts.workSans(
       fontWeight: FontWeight.w600,
       fontSize: 20,
       letterSpacing: letterSpacingOrNone(0.18),
       color: ReplyColors.black900,
     ),
-    subtitle2: GoogleFonts.workSans(
+    titleSmall: GoogleFonts.workSans(
       fontWeight: FontWeight.w600,
       fontSize: 14,
       letterSpacing: letterSpacingOrNone(-0.04),
       color: ReplyColors.black900,
     ),
-    bodyText1: GoogleFonts.workSans(
+    bodyLarge: GoogleFonts.workSans(
       fontWeight: FontWeight.normal,
       fontSize: 18,
       letterSpacing: letterSpacingOrNone(0.2),
       color: ReplyColors.black900,
     ),
-    bodyText2: GoogleFonts.workSans(
+    bodyMedium: GoogleFonts.workSans(
       fontWeight: FontWeight.normal,
       fontSize: 14,
       letterSpacing: letterSpacingOrNone(-0.05),
       color: ReplyColors.black900,
     ),
-    caption: GoogleFonts.workSans(
+    bodySmall: GoogleFonts.workSans(
       fontWeight: FontWeight.normal,
       fontSize: 12,
       letterSpacing: letterSpacingOrNone(0.2),
@@ -310,44 +310,44 @@ TextTheme _buildReplyLightTextTheme(TextTheme base) {
 
 TextTheme _buildReplyDarkTextTheme(TextTheme base) {
   return base.copyWith(
-    headline4: GoogleFonts.workSans(
+    headlineMedium: GoogleFonts.workSans(
       fontWeight: FontWeight.w600,
       fontSize: 34,
       letterSpacing: letterSpacingOrNone(0.4),
       height: 0.9,
       color: ReplyColors.white50,
     ),
-    headline5: GoogleFonts.workSans(
+    headlineSmall: GoogleFonts.workSans(
       fontWeight: FontWeight.bold,
       fontSize: 24,
       letterSpacing: letterSpacingOrNone(0.27),
       color: ReplyColors.white50,
     ),
-    headline6: GoogleFonts.workSans(
+    titleLarge: GoogleFonts.workSans(
       fontWeight: FontWeight.w600,
       fontSize: 20,
       letterSpacing: letterSpacingOrNone(0.18),
       color: ReplyColors.white50,
     ),
-    subtitle2: GoogleFonts.workSans(
+    titleSmall: GoogleFonts.workSans(
       fontWeight: FontWeight.w600,
       fontSize: 14,
       letterSpacing: letterSpacingOrNone(-0.04),
       color: ReplyColors.white50,
     ),
-    bodyText1: GoogleFonts.workSans(
+    bodyLarge: GoogleFonts.workSans(
       fontWeight: FontWeight.normal,
       fontSize: 18,
       letterSpacing: letterSpacingOrNone(0.2),
       color: ReplyColors.white50,
     ),
-    bodyText2: GoogleFonts.workSans(
+    bodyMedium: GoogleFonts.workSans(
       fontWeight: FontWeight.normal,
       fontSize: 14,
       letterSpacing: letterSpacingOrNone(-0.05),
       color: ReplyColors.white50,
     ),
-    caption: GoogleFonts.workSans(
+    bodySmall: GoogleFonts.workSans(
       fontWeight: FontWeight.normal,
       fontSize: 12,
       letterSpacing: letterSpacingOrNone(0.2),
